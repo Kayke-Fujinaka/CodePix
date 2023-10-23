@@ -14,7 +14,7 @@ type Account struct {
 }
 
 func (account *Account) isValid() error {
-	_, err := govalidator.ValidateStruct(acount)
+	_, err := govalidator.ValidateStruct(account)
 
 	if err != nil {
 		return err
@@ -23,10 +23,11 @@ func (account *Account) isValid() error {
 	return nil
 }
 
-func NewAccount(code string, name string) (*Account, error) {
+func NewAccount(bank *Bank, number string, ownerName string) (*Account, error) {
 	account := Account{
-		Code: code, 
-		Name: name,
+		OwnerName: ownerName,
+		Bank:      bank,
+		Number:    number,
 	}
 
 	account.ID = uuid.newV4().String()

@@ -18,6 +18,14 @@ type PixKey struct {
 func (pixKey *PixKey) isValid() error {
 	_, err := govalidator.ValidateStruct(pixKey)
 
+	if pixKey.Kind != "email" && pixKey.Kind != "cpf" {
+		return errors.New("invalid type of key")
+	}
+
+	if pixKey.Status != "active" && pixKey.Status != "inactive" {
+		return errors.New("invalid status")
+	}
+
 	if err != nil {
 		return err
 	}
